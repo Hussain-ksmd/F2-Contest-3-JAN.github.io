@@ -1,31 +1,32 @@
-document.querySelector('#login-form').addEventListener('submit', e => {
-    e.preventDefault();
-    let email = document.querySelector('#email').value;
-    let password = document.querySelector('#password').value;
-  
-    // Check if email and password match a registered user
-    let user = userData.find(user => user.email === email && user.password === password);
-    if (!user) {
-      document.querySelector('#error-msg').innerHTML = "Invalid email or password";
+function validateLogin() {
+  const email = document.getElementById("email").value;
+  const password = document.getElementById("password").value;
+  const errorMessage = document.getElementById("error-message");
+
+  // Check if email and password match with existing record
+  for (let i = 0; i < users.length; i++) {
+    if (users[i].email === email && users[i].password === password) {
+      // Generate token
+      const token = generateToken();
+      users[i].token = token;
+
+      // Redirect to next page
+      window.location.href = "chatgpt.html?token=" + token;
       return;
-      }
-      
-      // Generate and store token for user
-      let token = generateToken();
-      user.token = token;
-      
-      // Redirect to chatGpt page
-      window.location.href = "chatGpt.html";
-      });
-      
+    }
+  }
 
+  // If email and password do not match with existing record
+  errorMessage.innerHTML = "Invalid email or password";
+}
 
-      function generateToken() {
-      let characters = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
-      let token = "";
-      for (let i = 0; i < 10; i++) {
-      token += characters.charAt(Math.floor(Math.random() * characters.length));
-      }
-      return token;
-      }
-  
+function generateToken() {
+  let token = "";
+  const characters = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+
+  for (let i = 0; i < 10; i++) {
+    token += characters.charAt(Math.floor(Math.random() * characters.length));
+  }
+
+  return token;
+}

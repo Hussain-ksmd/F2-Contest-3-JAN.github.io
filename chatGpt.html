@@ -1,20 +1,25 @@
 
-<!-- 5. ChatGpt page (chatGpt.html) -->
-<div id="chat-container">
+<!DOCTYPE html>
+<html>
+<head>
+  <title>ChatGPT</title>
+</head>
+<body>
   <form>
-    <label>Enter your question:</label>
-    <input type="text" id="question">
-    <button type="submit" id="submit-btn">Submit</button>
-  </form>
-  <div id="answer-container" style="display: none;">
-    <p id="answer"></p>
-    <img id="answer-img">
-  </div>
-  <form style="display: none;" id="speak-form">
-    <label>Enter your token:</label>
-    <input type="text" id="token">
-    <button type="submit" id="speak-btn">Speak</button>
-  </form>
-  <p id="error-msg"></p>
-</div>
-<script src="chatGpt.js"></script>
+    <label for="question">Question:</label>
+    <input type="text" id="question" name="question"><br>
+    <input type="button" value="Submit" onclick="getAnswer()">
+    
+      </form>
+      <div id="answer"></div>
+      <div id="token-section" style="display:none">
+        <form>
+          <label for="token">Token:</label>
+          <input type="text" id="token" name="token"><br>
+          <input type="button" value="Speak Text" onclick="verifyToken()">
+        </form>
+        <p id="token-message" style="color:red"></p>
+      </div>
+      <script src="chatgpt.js"></script>
+    </body>
+    </html>
